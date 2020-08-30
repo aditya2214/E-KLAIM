@@ -41,7 +41,7 @@
                             <tbody>
                                 @foreach($reg as $r)
                                 <tr>
-                                    <td><a href="{{url('approved/'.$r->no_polis)}}"><i class="fas fa-hammer"></i></a></td>
+                                    <td><a  href="{{url('approved/'.$r->no_polis)}}" ><i class="fas fa-hammer"></i></a></td>
                                     <td><a href="{{url('detail_no/'.$r->no_polis)}}">{{$r->no_polis}}</a></td>
                                     <td>{{$r->tgl_kejadian}}</td>
                                     <td>{{$r->waktu_kejadian}}</td>

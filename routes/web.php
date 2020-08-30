@@ -35,3 +35,5 @@ Route::get('/detail_reg/{id}','RegistrasiController@detail');
 
 Route::get('/data_reg_claim','AdminController@index');
 Route::get('/approved/{id}','AdminController@approved');
+Route::get('/nilai/{id}','AdminController@nilai');
+Route::post('/storevalue','AdminController@storevalue');

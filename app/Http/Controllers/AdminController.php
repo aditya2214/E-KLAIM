@@ -37,15 +37,29 @@ class AdminController extends Controller
         }
         $approved->status = 1;
         $approved->save();
+        
+        $id = $approved->id;
+        return redirect('nilai/'.$id);
+        
+    }
 
+    public function nilai($id){
+        $data = \App\RegistrasiKlaim::find($id);
+
+        return view('admin.content.masukan_nilai',compact('data'));
+    }
+
+    public function storevalue(Request $request){
         $save_to_approval = new \App\Approval;
-        $save_to_approval->reg_id = $approved->id;
+        $save_to_approval->reg_id = $request->id;
         $save_to_approval->tanggal_persetujuan = date('Y-m-d');
-        $save_to_approval->nilai_yang_disetujui = 2000000;
+        $save_to_approval->nilai_yang_disetujui = $request->value;
         $save_to_approval->nama_user = Auth::user()->name;
         $save_to_approval->save();
 
         Session::flash('sukses','Data Berhasil Di Setujui');
-        return redirect()->back();
+        return redirect('/data_reg_claim');
     }
+
+    
 }
