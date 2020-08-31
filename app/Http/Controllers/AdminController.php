@@ -36,8 +36,13 @@ class AdminController extends Controller
         $approved = \App\RegistrasiKlaim::where('no_polis',$id)->first();
         if($approved->status==1){
             Session::flash('error','Data Sudah Di Approved');
-        return redirect()->back();
+            return redirect()->back();
+        }elseif($approved->name_file==null){
+            Session::flash('error','Dokument Pendukung Null : Tidak Bisa Di Setujui');
+            return redirect()->back();
         }
+        
+
         $approved->status = 1;
         $approved->save();
         
