@@ -32,8 +32,10 @@ Route::post('/upload_dokumen_pendukung/save', 'RegistrasiController@upload');
 Route::get('/success', 'RegistrasiController@check');
 Route::get('/upload_dokumen_pendukung/{id}','RegistrasiController@halaman_upload');
 Route::get('/detail_reg/{id}','RegistrasiController@detail');
+Route::get('/api','RegistrasiController@api');
 
 Route::get('/data_reg_claim','AdminController@index');
 Route::get('/approved/{id}','AdminController@approved');
 Route::get('/nilai/{id}','AdminController@nilai');
 Route::post('/storevalue','AdminController@storevalue');
+Route::get('/detail_no/{id}','AdminController@detailno');

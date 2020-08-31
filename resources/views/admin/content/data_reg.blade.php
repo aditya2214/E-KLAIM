@@ -36,12 +36,13 @@
                                     <th>status</th>
                                     <th>created_at</th>
                                     <th>name_file</th>
+                                    <th>Detail Pembayaran</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($reg as $r)
                                 <tr>
-                                    <td><a  href="{{url('approved/'.$r->no_polis)}}" ><i class="fas fa-hammer"></i></a></td>
+                                    <td><a  href="{{url('approved/'.$r->no_polis)}}" class="btn btn-primary btn-sm" onclick="return confirm('Pastikan Datanya Terlebih Dahulu?')" >Setujui</a></td>
                                     <td><a href="{{url('detail_no/'.$r->no_polis)}}">{{$r->no_polis}}</a></td>
                                     <td>{{$r->tgl_kejadian}}</td>
                                     <td>{{$r->waktu_kejadian}}</td>
@@ -58,6 +59,7 @@
                                     @endif
                                     <td>{{$r->created_at}}</td>
                                     <td><img src="{{url('storage/'.$r->name_file)}}" width="100px" height="100px" alt=""></td>
+                                    <td><img src="{{url('storage/'.$r->bukti_pembayaran)}}" width="100px" height="100px" alt=""></td>
                                 </tr>
                                 @endforeach
                             </tbody>

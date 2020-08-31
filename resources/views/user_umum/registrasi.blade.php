@@ -6,6 +6,12 @@
         <div class="col-md-3">
         </div>
         <div class="col-md-6">
+                    @if ($message = Session::get('error'))
+                    <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button> 
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @endif
             <div class="panel panel-default">
                 <div class="panel-heading">REGISTRASI E-KLAIM</div>
                 <div class="panel-body">
@@ -13,35 +19,35 @@
                     {{ csrf_field() }}
                         <div class="form-group">
                             <label for="">Nomor Polis:</label>
-                            <input name="no_polis" type="number" class="form-control">
+                            <input required name="no_polis" type="number" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">Tanggal kejadian:</label>
-                            <input name="tgl_kejadian" type="date" class="form-control">
+                            <input required name="tgl_kejadian" type="date" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">Waktu kejadian:</label>
-                            <input name="waktu_kejadian" type="time" class="form-control">
+                            <input required name="waktu_kejadian" type="time" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">Penyebab:</label>
-                            <input name="penyebab" type="text" class="form-control">
+                            <input required name="penyebab" type="text" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">Deskripsi kejadian:</label>
-                            <input name="deskripsi_kejadian" type="text" class="form-control">
+                            <input required name="deskripsi_kejadian" type="text" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">Estimasi kerugian:</label>
-                            <input name="estimasi_kerugian" type="text" class="form-control">
+                            <input required name="estimasi_kerugian" type="text" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">Nomor rekening:</label>
-                            <input name="no_rek" type="number" class="form-control">
+                            <input required name="no_rek" type="number" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">Nama bank:</label>
-                            <input name="nm_bank" type="text" class="form-control">
+                            <input required name="nm_bank" type="text" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -54,3 +60,10 @@
 </div>
 
 @endsection
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove(); 
+    });
+  }, 5000);
+</script>

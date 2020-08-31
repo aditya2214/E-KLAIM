@@ -18,7 +18,7 @@
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
-                <div class="navbar-header">
+                <div style="margin:15px;" class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
@@ -29,7 +29,12 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a style="position:absolute;top:13px;color:#5e635f;" href="{{url('/')}}">Home</a>
+                    <ul>
+                        <li><a style="margin:10px;  color:#5e635f;" href="{{url('/')}}"> Home</a></li>
+                        <li><a style="margin:10px;  color:#5e635f;" href="{{url('/registrasi')}}"> Registrasi Klaim</a></li>
+                        <li><a style="margin:10px;  color:#5e635f;" href="{{url('/success')}}"> Ckeck Klaim</a></li>
+                    </ul>
+                    
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
