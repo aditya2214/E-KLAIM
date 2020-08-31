@@ -8,6 +8,12 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">REGISTRASI E-KLAIM</div>
+                    @if ($message = Session::get('sukses'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button> 
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @endif
                 <div class="panel-body">
                     <form action="{{url('upload_dokumen_pendukung/save')}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
@@ -29,3 +35,10 @@
 </div>
 
 @endsection
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove(); 
+    });
+  }, 5000);
+</script>

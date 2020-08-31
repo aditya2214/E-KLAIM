@@ -39,3 +39,4 @@ Route::get('/approved/{id}','AdminController@approved');
 Route::get('/nilai/{id}','AdminController@nilai');
 Route::post('/storevalue','AdminController@storevalue');
 Route::get('/detail_no/{id}','AdminController@detailno');
+Route::get('cetak_penerima/{id}','AdminController@cetak');

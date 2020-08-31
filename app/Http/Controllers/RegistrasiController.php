@@ -113,17 +113,30 @@ class RegistrasiController extends Controller
 
     public function halaman_upload($id){
         $data = \App\RegistrasiKlaim::find($id);
+        Session::flash('sukses','Veririfikasi Sukses : No Polis ='.$data->no_polis);
         return view('user_umum.upload',compact('data'));
     }
 
     public function upload(Request $request){
         $upload = new \App\UploadPendukung;
         $upload->reg_id = $request->id;
-        $upload->lokasi_file =   $request->image->store('images','public');
+        try {
+            //code...
+            $upload->lokasi_file =   $request->image->store('images','public');
+        } catch (\Throwable $th) {
+            //throw $th;
+            $upload->lokasi_file=null;
+        }
         $upload->tgl_upload = date('Y-m-d');
-        $upload->name_file = $request->image->store('images','public');
-        $upload->save();
+        try {
+            //code...
+            $upload->name_file =   $request->image->store('images','public');
+        } catch (\Throwable $th) {
+            //throw $th;
+            $upload->name_file=null;
+        }        $upload->save();
 
+        Session::flash('sukses','Data Berhasil Di Simpan: Silahkan cari no polis anda di table berikut');
         return redirect('success');
         
     }

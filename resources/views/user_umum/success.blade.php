@@ -10,6 +10,12 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">Check Status Dokumen</div>
+                    @if ($message = Session::get('sukses'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button> 
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @endif
                 <div class="panel-body" style="overflow-x:auto;">
                     <table class="table table-hover" id="dataTable">
                         <thead>
@@ -53,5 +59,12 @@
     $(document).ready(function(){
         $('#dataTable').DataTable();
     });
+</script>
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove(); 
+    });
+  }, 5000);
 </script>
 @endsection

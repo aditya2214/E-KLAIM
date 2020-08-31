@@ -42,7 +42,15 @@
                             <tbody>
                                 @foreach($reg as $r)
                                 <tr>
-                                    <td><a  href="{{url('approved/'.$r->no_polis)}}" class="btn btn-primary btn-sm" onclick="return confirm('Pastikan Datanya Terlebih Dahulu?')" >Setujui</a></td>
+                                    <td>
+                                        <a  href="{{url('approved/'.$r->id)}}" class="btn btn-primary btn-sm" onclick="return confirm('Pastikan Datanya Terlebih Dahulu?')" >Setujui</a>
+                                       <hr> 
+                                       @if($r->status==0)
+
+                                       @else
+                                       <a target="_blank"href="{{url('cetak_penerima/'.$r->no_polis)}}" class="btn btn-warning btn-sm">Cetak</a>
+                                       @endif
+                                    </td>
                                     <td><a href="{{url('detail_no/'.$r->no_polis)}}">{{$r->no_polis}}</a></td>
                                     <td>{{$r->tgl_kejadian}}</td>
                                     <td>{{$r->waktu_kejadian}}</td>

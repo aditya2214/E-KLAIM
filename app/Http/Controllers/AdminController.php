@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use Auth;
+use PDF;
 class AdminController extends Controller
 {
     //
@@ -13,7 +14,8 @@ class AdminController extends Controller
         $reg = DB::table('registrasi_klaims')
             ->leftjoin('upload_pendukungs', 'registrasi_klaims.id', '=', 'upload_pendukungs.reg_id')
             ->leftjoin('detail_pembayarans', 'registrasi_klaims.id', '=', 'detail_pembayarans.reg_id')
-            ->select('registrasi_klaims.no_polis', 
+            ->select('registrasi_klaims.id',
+            'registrasi_klaims.no_polis', 
             'registrasi_klaims.tgl_kejadian',
             'registrasi_klaims.waktu_kejadian',
             'registrasi_klaims.penyebab',
@@ -33,20 +35,47 @@ class AdminController extends Controller
     }
 
     public function approved($id){
-        $approved = \App\RegistrasiKlaim::where('no_polis',$id)->first();
-        if($approved->status==1){
-            Session::flash('error','Data Sudah Di Approved');
-            return redirect()->back();
-        }elseif($approved->name_file==null){
-            Session::flash('error','Dokument Pendukung Null : Tidak Bisa Di Setujui');
-            return redirect()->back();
-        }
-        
+        $approved = DB::table('registrasi_klaims')
+        ->leftjoin('upload_pendukungs', 'registrasi_klaims.id', '=', 'upload_pendukungs.reg_id')
+        ->leftjoin('detail_pembayarans', 'registrasi_klaims.id', '=', 'detail_pembayarans.reg_id')
+        ->select('registrasi_klaims.id',
+        'registrasi_klaims.no_polis', 
+        'registrasi_klaims.tgl_kejadian',
+        'registrasi_klaims.waktu_kejadian',
+        'registrasi_klaims.penyebab',
+        'registrasi_klaims.deskripsi_kejadian',
+        'registrasi_klaims.estimasi_kerugian',
+        'registrasi_klaims.no_rek',
+        'registrasi_klaims.nm_bank',
+        'registrasi_klaims.no_klaim',
+        'registrasi_klaims.status',
+        'registrasi_klaims.created_at',
+        'upload_pendukungs.name_file',
+        'detail_pembayarans.bukti_pembayaran')
+        ->where('registrasi_klaims.id',$id)
+        ->get();
 
-        $approved->status = 1;
-        $approved->save();
         
-        $id = $approved->id;
+        foreach ($approved as $key => $value) {
+            # code...
+            $id = $value->id;
+            if ($value->status==1) {
+                # code...
+                Session::flash('error','Data sudah pernah di approved');
+                return redirect()->back();
+            }
+            if ($value->name_file==null) {
+                # code...
+                Session::flash('error','Data Pendukung Tidak Ada : Tidak Bisa Di Approved');
+                return redirect()->back();
+            }
+        }
+
+        // return $approved;
+        $data = \App\RegistrasiKlaim::find($id);
+        $data->status= 1;
+        $data->save();
+
         return redirect('nilai/'.$id);
         
     }
@@ -96,6 +125,45 @@ class AdminController extends Controller
             ->where('no_polis', $id)
             ->first();
         return view('admin.content.detail',compact('data_no'));
+    }
+
+    public function cetak($id){
+        try {
+            $curl = curl_init();
+ 
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://services.jp.co.id/api/dummy/index.php/verification?nopolis=".$id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 300,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type:application/json',
+                ),
+            ));
+ 
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+ 
+        curl_close($curl);
+ 
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $sel = json_decode($response);
+            
+        }
+         
+            $pdf = PDF::loadview('admin.content.pdf',compact('sel'))->setPaper('a4', 'landscape');
+            return $pdf->stream();
+ 
+        } catch (\Exception $e) {
+            Session::flash('error','Gagal Membuka PDF');
+        }
+ 
+        return redirect()->back();
     }
 
     
