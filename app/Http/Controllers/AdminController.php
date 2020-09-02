@@ -110,6 +110,7 @@ class AdminController extends Controller
     public function detailno($id){
         $data_no = DB::table('registrasi_klaims')
             ->leftjoin('upload_pendukungs', 'registrasi_klaims.id', '=', 'upload_pendukungs.reg_id')
+            ->leftjoin('detail_pembayarans', 'registrasi_klaims.id', '=', 'detail_pembayarans.reg_id')
             ->select('registrasi_klaims.no_polis', 
             'registrasi_klaims.tgl_kejadian',
             'registrasi_klaims.waktu_kejadian',
@@ -121,7 +122,8 @@ class AdminController extends Controller
             'registrasi_klaims.no_klaim',
             'registrasi_klaims.status',
             'registrasi_klaims.created_at',
-            'upload_pendukungs.name_file')
+            'upload_pendukungs.name_file',
+            'detail_pembayarans.bukti_pembayaran')
             ->where('no_polis', $id)
             ->first();
         return view('admin.content.detail',compact('data_no'));
@@ -160,7 +162,7 @@ class AdminController extends Controller
             return $pdf->stream();
  
         } catch (\Exception $e) {
-            Session::flash('error','Gagal Membuka PDF');
+            Session::flash('error','Gagal Membuka PDF'.$e);
         }
  
         return redirect()->back();

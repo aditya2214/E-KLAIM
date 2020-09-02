@@ -19,7 +19,7 @@
                         <strong>{{ $message }}</strong>
                     </div>
                     @endif
-                    <div class="panel-body">
+                    <div class="panel-body" style="overflow-x:auto;">
                         <table id="dataTable" class="table">
                             <thead>
                                 <tr>
@@ -35,7 +35,7 @@
                                     <th>no_klaim</th>
                                     <th>status</th>
                                     <th>created_at</th>
-                                    <th>name_file</th>
+                                    <th>Dokumen Pendukung</th>
                                     <th>Detail Pembayaran</th>
                                 </tr>
                             </thead>
@@ -61,9 +61,9 @@
                                     <td>{{$r->nm_bank}}</td>
                                     <td>{{$r->no_klaim}}</td>
                                     @if($r->status==0)
-                                    <td><i class="fas fa-user-clock"></i></td>
+                                    <td><i class="fas fa fa-times"></i></td>
                                     @elseif($r->status==1)
-                                    <td><i class="fas fa-user-check"></i></td>
+                                    <td><i class="fas fa fa-check"></i></td>
                                     @endif
                                     <td>{{$r->created_at}}</td>
                                     <td><img src="{{url('storage/'.$r->name_file)}}" width="100px" height="100px" alt=""></td>
@@ -80,8 +80,8 @@
 @endsection
 <script>
   window.setTimeout(function() {
-    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+    $(".alert").fadeTo(700, 0).slideUp(700, function(){
       $(this).remove(); 
     });
-  }, 5000);
+  }, 7000);
 </script>

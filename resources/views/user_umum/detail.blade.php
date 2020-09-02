@@ -18,14 +18,14 @@
                 @if($reg->name_file==null)
                 <li class="list-group-item">Dokumen Pendukung   : <label for="" class="label label-danger">Anda Belum Upload Document Pendukung</label></li>
                 @else
-                <li class="list-group-item">Dokumen Pendukung   : <img style="display: block; margin-left: auto; margin-right: auto;" src="{{url('storage/'.$reg->name_file)}}" width="750px;" height="850px;" alt=""></li>
+                <li class="list-group-item">Dokumen Pendukung   : <img style="display: block; margin-left: auto; margin-right: auto;" src="{{url('storage/'.$reg->name_file)}}" width="75%;" height="85%;" alt=""></li>
                 @endif
                 @if($reg->name_file==null)
                 <li class="list-group-item">detail_pembayaran   : <label for="" class="label label-danger">Mohon Upload Document Pendukung</label></li>
                 @elseif($reg->bukti_pembayaran==null)
                 <li class="list-group-item">detail_pembayaran   : <label for="" class="label label-warning">Masih Dalam Proses</label></li>
                 @else
-                <li class="list-group-item">detail_pembayaran   : Sudah Di Bayarkan<br><img style="display: block; margin-left: auto; margin-right: auto;" src="{{url('storage/'.$reg->bukti_pembayaran)}}" width="750px;" height="850px;" alt=""></li>
+                <li class="list-group-item">detail_pembayaran   : Sudah Di Bayarkan<br><img style="display: block; margin-left: auto; margin-right: auto;" src="{{url('storage/'.$reg->bukti_pembayaran)}}" width="75%;" height="85%;" alt=""></li>
                 @endif
             </ul>
         </div>

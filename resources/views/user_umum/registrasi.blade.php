@@ -62,8 +62,8 @@
 @endsection
 <script>
   window.setTimeout(function() {
-    $(".alert").fadeTo(200, 0).slideUp(200, function(){
+    $(".alert").fadeTo(900, 0).slideUp(900, function(){
       $(this).remove(); 
     });
-  }, 2000);
+  }, 9000);
 </script>

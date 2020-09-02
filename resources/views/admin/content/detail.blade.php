@@ -15,10 +15,11 @@
                 <li class="list-group-item">tgl_kejadian        : {{$data_no->tgl_kejadian}}</li>
                 <li class="list-group-item">status              : {{$data_no->status}}</li>
                 <li class="list-group-item">created_at          : {{$data_no->created_at}}</li>
-                <li class="list-group-item">name_file           : <img style="margin:30px;" src="{{url('storage/'.$data_no->name_file)}}" width="750px" height="850px" alt=""></li>
+                <li class="list-group-item">name_file           : <img style="margin:30px;" src="{{url('storage/'.$data_no->name_file)}}" width="75%;" height="85%;" alt=""></li>
+                <li class="list-group-item">bukti pembayaran    : <img style="margin:30px;" src="{{url('storage/'.$data_no->bukti_pembayaran)}}" width="75%;" height="85%;" alt=""></li>
             </ul>
         </div>
     </div>
 </div>
 
-@endsection
+@endsection 

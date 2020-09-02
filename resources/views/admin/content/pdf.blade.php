@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body>
-   <p>Nama Kantor : {{$sel->namakantor}}</p>
+   <p>Nama Polis : {{$sel->nomorpolis}}</p>
    <p>Nama Debitur : {{$sel->namadebitur}}</p>
    <p>Alamat : {{$sel->alamat}}</p>
 </body>

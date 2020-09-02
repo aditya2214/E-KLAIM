@@ -37,8 +37,8 @@
 @endsection
 <script>
   window.setTimeout(function() {
-    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+    $(".alert").fadeTo(700, 0).slideUp(700, function(){
       $(this).remove(); 
     });
-  }, 5000);
+  }, 7000);
 </script>
